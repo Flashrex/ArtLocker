@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 # public
-public
+public/avatars
+public/images
