@@ -1,5 +1,5 @@
 const model = require('./model');
-const view = require('./view');
+const view = require('./pages/view');
 const form = require('./settings');
 const fs = require('fs');
 const crypto = require('crypto');

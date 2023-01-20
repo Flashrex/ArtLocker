@@ -1,6 +1,7 @@
 const model = require('./model');
-const view = require('./view');
-const form = require('./form');
+const viewPage = require('./pages/view');
+const formPage = require('./pages/form');
+const paintingPage = require('./pages/painting');
 const fs = require('fs');
 const userModel = require('../user/model');
 
@@ -21,15 +22,52 @@ function listAction(request, response) {
         userModel.get( { id: userData.id} ).then(
           user => {
             userData.avatar = user.avatar;
-            response.send(view(paintings, userData));
+            response.send(viewPage(paintings, userData));
           }
         )
       } else {
-        response.send(view(paintings, userData));
+        response.send(viewPage(paintings, userData));
       }
     },
-    error => response.send(error),
+    error => response.send(error)
   );
+}
+
+function listSingleAction(request, response) {
+  const id = parseInt(request.params.id, 10);
+
+  model
+    .get(id)
+    .then(
+      painting => {
+        console.log(painting);
+        const isLoggedIn = request.session.passport !== undefined;
+
+        const userData = {
+          isLoggedIn: isLoggedIn,
+          id: isLoggedIn ? request.session.passport.user : -1,
+          avatar: undefined
+        }
+
+        if(isLoggedIn) {
+          userModel.get( { id: userData.id} ).then(
+            user => {
+              userData.avatar = user.avatar;
+              response.send(paintingPage(painting, userData));
+            }
+          )
+        } else {
+          response.send(paintingPage(painting, userData));
+        }
+
+        //update views
+        painting.views++;
+
+        model.save(painting);
+
+      },
+      error => response.send(error)
+    );
 }
 
 function deleteAction(request, response) {
@@ -56,7 +94,7 @@ function deleteAction(request, response) {
 }
 
 function formAction(request, response) {
-  let painting = { id: '', title: '', description: '', author: '', price: 0.0, image: '' };
+  let painting = { id: '', title: '', description: '', author: '', price: 0.0, image: '', favs: 0, views: 0 };
 
   const isLoggedIn = request.session.passport !== undefined;
 
@@ -75,10 +113,10 @@ function formAction(request, response) {
           model
             .get(parseInt(request.params.id, 10))
             .then(painting => {
-              response.send(form(painting, userData)), error => response.send(error)
+              response.send(formPage(painting, userData)), error => response.send(error)
             });
         } else {
-          const body = form(painting, userData);
+          const body = formPage(painting, userData);
           response.send(body);
         }
       }
@@ -89,10 +127,10 @@ function formAction(request, response) {
       model
         .get(parseInt(request.params.id, 10))
         .then(painting => {
-          response.send(form(painting, userData)), error => response.send(error)
+          response.send(formPage(painting, userData)), error => response.send(error)
         });
     } else {
-      const body = form(painting, userData);
+      const body = formPage(painting, userData);
       response.send(body);
     }
   }
@@ -121,13 +159,16 @@ function saveAction(request, response) {
     }
 
     //save new painting to database
+    const creation = date.toJSON().slice(0, 19).replace('T', ' ');
+
     let painting = {
       id: request.body.id,
       title: request.body.title,
       description: request.body.description,
       author: 0,
       price: price,
-      image: filename
+      image: filename,
+      createdAt: creation
     };
 
     const userid = request.session.passport.user;
@@ -156,6 +197,7 @@ function saveAction(request, response) {
 
 module.exports = {
   listAction,
+  listSingleAction,
   deleteAction,
   formAction,
   saveAction,

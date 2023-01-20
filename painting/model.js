@@ -35,7 +35,7 @@ function getAllByAuthorId(authorId) {
 function getOne(id) {
   return new Promise((resolve, reject) => {
     
-    const query = 'SELECT p.*, u.username FROM Paintings p LEFT JOIN Users u ON (p.author=u.id) WHERE p.id = ?';
+    const query = 'SELECT p.*, u.* FROM Paintings p LEFT JOIN Users u ON (p.author=u.id) WHERE p.id = ?';
     
     connection.query(query, [id], (error, results) => {
       if (error) {
@@ -50,9 +50,9 @@ function getOne(id) {
 
 function insert(painting) {
   return new Promise((resolve, reject) => {
-    const query = 'INSERT INTO Paintings (title, description, author, price, image) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO Paintings (title, description, author, price, image, createdAt) VALUES (?, ?, ?, ?, ?, ?)';
     connection.query(query, 
-        [painting.title, painting.description, painting.author, painting.price, painting.image], 
+        [painting.title, painting.description, painting.author, painting.price, painting.image, painting.createdAt], 
         (error, results) => {
             if (error) {
                 reject(error);
@@ -66,10 +66,10 @@ function insert(painting) {
 
 function update(painting) {
   return new Promise((resolve, reject) => {
-    const query = 'UPDATE Paintings SET title = ?, description = ?, author = ?, price = ?, image = ? WHERE id = ?';
+    const query = 'UPDATE Paintings SET title = ?, description = ?, author = ?, price = ?, image = ?, favs = ?, views = ? WHERE id = ?';
     connection.query(
       query,
-      [painting.title, painting.description, painting.author, painting.price, painting.image, painting.id],
+      [painting.title, painting.description, painting.author, painting.price, painting.image, painting.favs, painting.views, painting.id],
       (error, results) => {
         if (error) {
           reject(error);

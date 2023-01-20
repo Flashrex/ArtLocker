@@ -1,11 +1,11 @@
-
 module.exports = function render(paintings, user) {
     return `<!DOCTYPE html>
     <html>
       <head>
         <title>ArtLocker</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/main.css" />
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body>
@@ -41,7 +41,7 @@ function createItem(item) {
     return `
         <div class="item">
             <div class="image-container">
-                <img src="/images/${item.image}">
+                <a href="/painting/item/${item.id}"><img class="item-image" src="/images/${item.image}"></a>
                 <div class="image-data">
                     <p class="item-headline">${item.title}</p>
                     <a class="item-seller" href="/user/profile/${item.author}">@${item.username}</a>

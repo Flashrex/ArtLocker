@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>ArtLocker</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="public/stylesheets/style.css" />
+        <link rel="stylesheet" href="public/stylesheets/painting.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="public/favicon.ico" />
+      </head>
+      <body>
+
+        <nav class="navbar">
+            <a href="/"><img class="logo" src="public/logo.svg"><!-- Icon by https://freeicons.io/profile/75801 --></a>
+            <p class="headline">ArtLocker</p>
+            <div>
+                <img class="profile-icon" src="${user.avatar ? `/avatars/${user.avatar}` : "/user.svg"}" onclick="toggleProfileMenu()"><!-- Icon by https://freeicons.io/profile/6156 -->
+                <!-- Remove this -->
+                <div id="profile_menu" class="profile-menu" style="display: none;">
+                    <a href="/login">Einloggen</a>
+                </div>`
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="image-container">
+                <img class="painting-bg-image" src="public/images/dsfds1674240965093.png" alt="">
+                <img class="painting-image" src="public/images/dsfds1674240965093.png" alt="">
+            </div>
+            <div class="image-data-container">
+                <p class="item-headline">ImageName</p>
+                <div class="user-container">
+                    <img class="user-icon" src="public/user.svg" alt="">
+                    <div class="user-data">
+                        <a class="user-name" href="">@Flashrex</a>
+                        <div class="user-joined">Mitglied seit 01.05.2020</div>
+                    </div>
+                </div>
+                <p class="item-price">50.00 €</p>
+                <div class="horizontal-line"></div>
+                <div class="image-description-container">
+                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam nostrum ullam porro eos velit accusamus, natus consectetur qui doloremque exercitationem. Sed in culpa tempore, ullam temporibus architecto iure tenetur dignissimos.</p>
+                </div>
+                <div class="horizontal-line"></div>
+                <div class="icon-container flex">
+                    <div class="creation flex">
+                        <img class="logo" src="public/calendar.svg"><!-- Icon by https://freeicons.io/profile/823 -->
+                        <p>22.03.2023</p>
+                    </div>
+                    <div class="views flex">
+                        <img class="logo" src="public/eye.svg"><!-- Icon by https://freeicons.io/profile/3 -->
+                        <p>666</p>
+                    </div>
+                    <div class="favorites flex">
+                        <img class="logo" src="public/star.svg"><!-- Icon by https://freeicons.io/profile/3 -->
+                        <p>25</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </body>
+      <script>
+            function toggleProfileMenu() {
+                const menu = document.getElementById("profile_menu");
+
+                if(profile_menu.style.display == "none") profile_menu.style.display = "flex";
+                else profile_menu.style.display = "none";
+            }
+      </script>
+    </html>

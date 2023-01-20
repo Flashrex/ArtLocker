@@ -3,8 +3,8 @@ const expressSession = require('express-session');
 const LocalStrategy = require('passport-local');
 const crypto = require('crypto');
 
-const login = require('./login');
-const register = require('./register');
+const login = require('./pages/login');
+const register = require('./pages/register');
 
 const userModel = require('../user/model');
 

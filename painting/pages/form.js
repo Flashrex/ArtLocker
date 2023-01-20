@@ -4,7 +4,7 @@ module.exports = function render(painting, user) {
     <head>
       <meta charset="UTF-8">
       <title>ArtLocker</title>
-      <link rel="stylesheet" href="/style.css" />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     </head>
     <body>
@@ -25,7 +25,7 @@ module.exports = function render(painting, user) {
                     <input type="hidden" id="id" name="id" value="${painting.id}" />
                     <div class="form-item">
                         <label for="id">Titel:</label>
-                        <input type="text" id="title" name="title" value="${painting.title}" maxlength=15 required/>
+                        <input type="text" id="title" name="title" value="${painting.title}" maxlength=20 required/>
                     </div>
                     <div class="form-item">
                         <label for="description">Beschreibung:</label>

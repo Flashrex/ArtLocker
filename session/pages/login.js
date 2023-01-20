@@ -4,7 +4,7 @@ module.exports = function render() {
         <head>
             <title>ArtLocker</title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="/style.css" />
+            <link rel="stylesheet" href="/stylesheets/style.css" />
             <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         </head>
         <body>
@@ -18,34 +18,22 @@ module.exports = function render() {
     
             <div class="content">
                 <div class="form-content">
-                    <p>Bitte Daten eingeben</p>
-                    <form action="/register" method="post" id="register">
+                    <p>Bitte melden Sie sich an</p>
+                    <form action="/login" method="post" id="login">
                         <div>
                             <div class="form-item">
-                                <label for="username">Email:</label>
-                                <input type="email" name="username" id="username" required autofocus>
+                                <label for="username">Benutzername:</label>
+                                <input type="text" name="username" id="username" required autofocus>
                             </div>
                             <div class="form-item">
                                 <label for="password">Passwort:</label>
                                 <input type="password" name="password" id="password" required>
                             </div>
-                            <div class="form-item">
-                                <label for="vorname">Vorname:</label>
-                                <input type="text" name="vorname" id="firstname" required>
-                            </div>
-                            <div class="form-item">
-                                <label for="nachname">Nachname:</label>
-                                <input type="text" name="nachname" id="surname" required>
-                            </div>
-                            <div class="form-item">
-                                <label for="nickname">Benutzername:</label>
-                                <input type="text" name="nickname" id="nickname" required>
-                            </div>
                         </div>
                         <div class="form-button">
-                            <button type="submit">Registrieren</button>
+                            <button type="submit">Einloggen</button>
                         </div>
-                        <p id="register_text">Schon einen Account? <a href="/login">Einloggen</a></p>
+                        <p id="register_text">Noch keinen Account? <a href="/register">Registrieren</a></p>
                     </form>
                 </div>
             </div>
