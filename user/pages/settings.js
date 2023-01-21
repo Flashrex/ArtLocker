@@ -5,7 +5,8 @@ module.exports = function render(user, localUser) {
             <head>
                 <meta charset="UTF-8">
                 <title>ArtLocker</title>
-                <link rel="stylesheet" href="/style.css" />
+                <link rel="stylesheet" href="/stylesheets/style.css" />
+                <link rel="stylesheet" href="/stylesheets/form.css" />
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </head>
             <body>

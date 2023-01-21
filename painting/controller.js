@@ -63,6 +63,8 @@ function listSingleAction(request, response) {
         //update views
         painting.views++;
 
+        console.log(painting);
+
         model.save(painting);
 
       },

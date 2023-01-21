@@ -1,11 +1,12 @@
 const model = require('./model');
-const view = require('./pages/view');
-const form = require('./settings');
 const fs = require('fs');
 const crypto = require('crypto');
 
 const userModel = require('./model');
 const paintingModel = require('../painting/model');
+
+const view = require('./pages/view');
+const form = require('./pages/settings');
 
 
 function listAction(request, response) {

@@ -46,19 +46,21 @@ module.exports = function render(user, localUser) {
 
 function createItem(item, isProfileOwner) {
     return `
-        <div class="item">
-            <div class="image-container">
+        <div class="item background-contrast">
+            <div class="image-container-profile">
                 <a href="/painting/item/${item.id}"><img class="item-image" src="/images/${item.image}"></a>
                 <div class="image-data">
-                    <p class="item-headline">${item.title}</p>
-                    <a class="item-seller" href="/user/profile/${item.author}">@${item.username}</a>
+                    <div class="item-data-container">
+                        <p class="item-headline">${item.title}</p>
+                        <a class="item-seller" href="/user/profile/${item.author}">@${item.username}</a>
+                    </div>
                 </div>
             </div> 
             <div class="item-data-container">
                 <p class="item-description">${item.description}</p>
                 <div class="horizontal-line"></div>
                 <div class="buy-container">
-                    <p class="item-price">${item.price} €</p>
+                    <p class="item-price font-grey">${item.price} €</p>
                     ${isProfileOwner 
                         ? `<button class="buy-button"><a href="/painting/delete/${item.id}">Löschen</a></button>` 
                         : `<button class="buy-button"><a href="/painting/buy/${item.id}">Kaufen</a></button>`}

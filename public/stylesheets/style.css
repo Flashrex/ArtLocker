@@ -1,8 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Roboto&family=Rowdies&display=swap');
 
+* {
+  --background: rgb(223, 223, 223);
+  --background-contrast: rgb(248, 248, 248);
+  
+  --font-grey: rgb(51, 51, 51);
+  --font-white: whitesmoke;
+}
+
+.background-contrast {
+  background: var(--background-contrast);
+}
+
+.font-grey {
+  color: var(--font-grey);
+}
+
+.font-white {
+  color: var(--font-white);
+}
+
+.margin-2 {
+  margin: 2rem;
+}
+
 body {
   margin: 0;
-  background-color: rgb(223, 223, 223);
+  background-color: var(--background);
   font-family: 'Roboto', sans-serif;
 }
 
@@ -11,7 +35,7 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 75px;
-  background-color: rgb(248, 248, 248);
+  background-color: var(--background-contrast);
 }
 
 .logo {
@@ -22,7 +46,7 @@ body {
 .headline {
   font-size: 2rem;
   font-weight: bold;
-  color:rgb(77, 77, 77);
+  color: var(--font-grey)
 }
 
 .profile-icon {
@@ -38,7 +62,7 @@ body {
 .profile-menu {
   position: absolute;
   width: fit-content;
-  background-color: rgb(248, 248, 248);
+  background-color: var(--background-contrast);
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px rgba(90, 90, 90, 0.116);
 
@@ -62,64 +86,6 @@ body {
   background-color: rgb(209, 209, 209);
 }
 
-
-
-/* Form */
-.content {
-  display: flex;
-  justify-content: center;
-}
-
-
-.form-content {
-  padding: 1rem 4rem;
-  margin-top: 4vh;
-  background-color: rgb(247, 245, 245);
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px 1px rgba(124, 124, 124, 0.418);
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-top: 0.5rem;
-}
-
-.form-button {
-  display: flex;
-  justify-content: center;
-  margin: 1rem;
-}
-
-.form-button > button {
-  background-color: rgb(209, 209, 209);
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-}
-
-.form-button > button:hover{
-  background-color: rgb(139, 139, 139);
-  cursor: pointer;
-}
-
-#description {
-  resize:both;
-}
-
-#register_text {
-  text-align: center;
-}
-
-.error {
-  color: rgb(148, 55, 55);
-}
-
 /* user-profile */
 .profile-content {
   display: flex;
@@ -129,7 +95,7 @@ body {
 .profile-container {
   padding: 1rem 2rem;
   margin-top: 4vh;
-  background-color: rgb(247, 245, 245);
+  background-color: var(--background-contrast);;
   border-radius: 5px;
   box-shadow: 1px 1px 1px 1px rgba(124, 124, 124, 0.418);
   width: fit-content;
@@ -141,7 +107,7 @@ body {
   align-items: center;
 }
 
-.profile-container>div {
+.profile-container > div {
   display: flex;
   flex-direction: column;
 }

@@ -35,7 +35,7 @@ function getAllByAuthorId(authorId) {
 function getOne(id) {
   return new Promise((resolve, reject) => {
     
-    const query = 'SELECT p.*, u.* FROM Paintings p LEFT JOIN Users u ON (p.author=u.id) WHERE p.id = ?';
+    const query = 'SELECT u.*, p.* FROM Paintings p LEFT JOIN Users u ON (p.author=u.id) WHERE p.id = ?';
     
     connection.query(query, [id], (error, results) => {
       if (error) {

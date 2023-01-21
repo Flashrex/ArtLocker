@@ -19,11 +19,31 @@ module.exports = function render(paintings, user) {
             </div>
         </nav>
 
-        <div class="item-container">
-            ${paintings.map(createItem).join('')}
-            <div class="item-add">
-                <a href="/painting/form">+</a>
+        
+        <div class="content">
+            
+            <div class="category-container">
+                <p class="category-headline">Am Beliebtesten</p>
+                <div class="item-container">
+                    ${findMostPopularItems(paintings).map(createItem).join('')}
+                </div>
             </div>
+
+            <div class="category-container">
+                <p class="category-headline">Alle Angebote</p>
+                <div class="item-container">
+                    ${paintings.map(createItem).join('')}
+                    ${user.isLoggedIn 
+                        ? `<div class="item-add">
+                            <a href="/painting/form">+</a>
+                            </div>`
+
+                        : ``
+                    }
+                </div>
+            </div>
+            
+            
         </div>
       </body>
       <script>
@@ -43,19 +63,28 @@ function createItem(item) {
             <div class="image-container">
                 <a href="/painting/item/${item.id}"><img class="item-image" src="/images/${item.image}"></a>
                 <div class="image-data">
-                    <p class="item-headline">${item.title}</p>
-                    <a class="item-seller" href="/user/profile/${item.author}">@${item.username}</a>
+                    <div class="item-data-container">
+                        <p class="item-headline">${item.title}</p>
+                        <a class="item-seller" href="/user/profile/${item.author}">@${item.username}</a>
+                    </div>
+                    <div class="item-price-container">
+                        <p class="item-price font-white">${item.price} €</p>
+                    </div>
                 </div>
             </div> 
-            <div class="item-data-container">
-                <p class="item-description">${item.description}</p>
-                <div class="horizontal-line"></div>
-                <div class="buy-container">
-                    <p class="item-price">${item.price} €</p>
-                    <button class="buy-button"><a href="/painting/buy/${item.id}">Kaufen</a></button>
-                </div>
-            </div>
         </div>`
+}
+
+function findMostPopularItems(items, count) {
+    let copy = [...items];
+
+    return copy.sort(compareItems).splice(count);
+}
+
+function compareItems(item1, item2) {
+    if(item1.views > item2.views) return -1;
+    else if(item1.views < item2.views) return 1;
+    else return 0;
 }
 
 function createProfileMenu(user) {

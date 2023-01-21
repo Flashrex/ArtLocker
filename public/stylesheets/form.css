@@ -1,0 +1,54 @@
+/* Form */
+.content {
+    display: flex;
+    justify-content: center;
+}
+  
+.form-content {
+    padding: 1rem 4rem;
+    margin-top: 4vh;
+    background-color: rgb(247, 245, 245);
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(124, 124, 124, 0.418);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.form-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+  
+.form-button {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+  
+.form-button > button {
+    background-color: rgb(209, 209, 209);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+  
+.form-button > button:hover{
+    background-color: rgb(139, 139, 139);
+    cursor: pointer;
+}
+  
+#description {
+    resize:both;
+}
+  
+#register_text {
+    text-align: center;
+}
+  
+.error {
+    color: rgb(148, 55, 55);
+}
