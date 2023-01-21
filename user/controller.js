@@ -8,6 +8,7 @@ const paintingModel = require('../painting/model');
 const view = require('./pages/view');
 const form = require('./pages/settings');
 
+const { log } = require('../logger');
 
 function listAction(request, response) {
     const id = parseInt(request.params.id, 10);
@@ -93,19 +94,19 @@ function saveAction(request, response) {
 
           //delete old avatar
           fs.rm(`public/avatars/${user.avatar}`, function() {
-            console.log("avatar deleted");
+            log("UserController", `Deleted User Avatar [UserId: ${userid}]`, "info")
           })
 
           const date = new Date();
           const filename = `${user.username}${date.getTime()}.png`;
 
           fs.rename(request.file.path, 'public/avatars/' + filename, function() {
-            console.log("avatar renamed");
+            log("UserController", `Renamed Avatar File [UserId: ${userid}]`, "info")
           });
 
           //delete temporary file
           fs.rm(request.file.path, function() {
-            console.log("deleted temp avatar");
+            log("UserController", `Deleted temporary Avatar file`, "info")
           });
 
           user.avatar = filename;

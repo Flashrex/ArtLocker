@@ -5,6 +5,8 @@ const paintingPage = require('./pages/painting');
 const fs = require('fs');
 const userModel = require('../user/model');
 
+const { log } = require('../logger');
+
 function listAction(request, response) {
   
   model.getAll().then(
@@ -40,7 +42,6 @@ function listSingleAction(request, response) {
     .get(id)
     .then(
       painting => {
-        console.log(painting);
         const isLoggedIn = request.session.passport !== undefined;
 
         const userData = {
@@ -62,9 +63,6 @@ function listSingleAction(request, response) {
 
         //update views
         painting.views++;
-
-        console.log(painting);
-
         model.save(painting);
 
       },
@@ -81,7 +79,7 @@ function deleteAction(request, response) {
     .then(
       painting => {
         fs.rm(`public/images/${painting.image}`, function() {
-          console.log("file deleted");
+          log("PaintingController", `Deleted image from database. [OfferId: ${painting.id}]`, "info");
         });
       }
     );
@@ -145,12 +143,12 @@ function saveAction(request, response) {
     const filename = `${request.body.title}${date.getTime()}.png`;
 
     fs.rename(request.file.path, 'public/images/' + filename, function() {
-        console.log("file renamed");
+      log("PaintingController", `Renamed image from database. [OfferId: ${painting.id}]`, "info");
     });
 
     //delete temporary file
     fs.rm(request.file.path, function() {
-        console.log("deleted temp file");
+      log("PaintingController", `Deleted temporary image from database. [OfferId: ${painting.id}]`, "info");
     })
 
     //make sure price has a correct value

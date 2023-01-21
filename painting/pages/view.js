@@ -25,7 +25,7 @@ module.exports = function render(paintings, user) {
             <div class="category-container">
                 <p class="category-headline">Am Beliebtesten</p>
                 <div class="item-container">
-                    ${findMostPopularItems(paintings).map(createItem).join('')}
+                    ${findMostPopularItems(paintings, 5).map(createItem).join('')}
                 </div>
             </div>
 
@@ -78,7 +78,7 @@ function createItem(item) {
 function findMostPopularItems(items, count) {
     let copy = [...items];
 
-    return copy.sort(compareItems).splice(count);
+    return copy.sort(compareItems).slice(0, count);
 }
 
 function compareItems(item1, item2) {

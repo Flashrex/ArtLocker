@@ -104,7 +104,6 @@ module.exports = app => {
               //register user
               userModel.save(newUser).then(
                 newUserId => {
-                  console.log(newUserId);
                   newUser.id = newUserId.insertId;
                   return done(null, newUser);
                 },

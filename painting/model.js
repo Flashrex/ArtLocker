@@ -1,6 +1,7 @@
 const database = require('./../database');
 const connection = database.connection;
 
+const { log } = require('../logger');
 
 function getAll() {
   return new Promise((resolve, reject) => {
@@ -8,7 +9,7 @@ function getAll() {
     
     connection.query(query, (error, results) => {
       if (error) {
-        console.log(error);
+        log("Database", error, "error");
         reject(error);
       } else {
         resolve(results);
@@ -23,7 +24,7 @@ function getAllByAuthorId(authorId) {
 
     connection.query(query, [authorId], (error, results) => {
       if (error) {
-        console.log(error);
+        log("Database", error, "error");
         reject(error);
       } else {
         resolve(results);
@@ -39,7 +40,7 @@ function getOne(id) {
     
     connection.query(query, [id], (error, results) => {
       if (error) {
-        console.log(error);
+        log("Database", error, "error");
         reject(error);
       } else {
         resolve(results[0]);
@@ -86,7 +87,7 @@ function remove(id) {
     const query = 'DELETE FROM Paintings WHERE id = ?';
     connection.query(query, [id], (error, results) => {
       if (error) {
-        console.log(error);
+        log("Database", error, "error");
         reject(error);
       } else {
         resolve(results[0]);

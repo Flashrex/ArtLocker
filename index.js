@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+const { log } = require('./logger');
 const auth = require('./session/auth');
 
 //routes
@@ -41,5 +42,5 @@ app.use('/user', userRouter);
 
 //start listening for connections
 app.listen(8080, () => {
-  console.log('Server is listening to http://localhost:8080');
+  log("Server", "Listening to http://localhost:8080", "info");
 });

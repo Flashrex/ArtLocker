@@ -26,7 +26,7 @@ module.exports = function render(painting, user) {
                     <input type="hidden" id="id" name="id" value="${painting.id}" />
                     <div class="form-item">
                         <label for="id">Titel:</label>
-                        <input type="text" id="title" name="title" value="${painting.title}" maxlength=20 required/>
+                        <input type="text" id="title" name="title" value="${painting.title}" maxlength=15 required/>
                     </div>
                     <div class="form-item">
                         <label for="description">Beschreibung:</label>

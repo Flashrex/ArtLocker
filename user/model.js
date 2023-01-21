@@ -1,6 +1,8 @@
 const database = require('../database');
 const connection = database.connection;
 
+const { log } = require('../logger');
+
 function get(queryData = {}) {
   return new Promise((resolve, reject) => {
     let queryElements = [];
@@ -13,7 +15,7 @@ function get(queryData = {}) {
     const queryString = 'SELECT * FROM users WHERE ' + queryElements.join(' AND ');
     connection.query(queryString, Object.values(queryData), (error, results) => {
       if (error) {
-        console.log(error);
+        log("Database", error, "error");
         reject(error);
       } else {
         resolve(results[0]);
