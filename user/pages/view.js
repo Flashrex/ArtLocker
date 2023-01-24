@@ -30,6 +30,14 @@ module.exports = function render(user, localUser) {
                     </div>
                     <div class="profile-item-container">
                         ${user.paintings.map(x => createItem(x, localUser.isProfileOwner)).join('')}
+                        
+                        ${localUser.isLoggedIn 
+                            ? `<div class="item-add">
+                                <a href="/painting/form">+</a>
+                                </div>`
+
+                            : ``
+                        }
                     </div>
                 </div>
             </body>

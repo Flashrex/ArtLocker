@@ -42,9 +42,14 @@ module.exports = app => {
   app.post(
     '/login',
     passport.authenticate('local-login', { 
-      successRedirect: '/',
       failureRedirect: '/login.html' 
-    })
+    }),
+    function(req, res) {
+      const id = req.session.passport.user;
+
+      if(id) return res.redirect(`/user/profile/${id}`);
+      else return res.redirect('/');
+    }
   );
 
   passport.use('local-login',

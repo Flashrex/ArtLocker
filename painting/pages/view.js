@@ -33,13 +33,6 @@ module.exports = function render(paintings, user) {
                 <p class="category-headline">Alle Angebote</p>
                 <div class="item-container">
                     ${paintings.map(createItem).join('')}
-                    ${user.isLoggedIn 
-                        ? `<div class="item-add">
-                            <a href="/painting/form">+</a>
-                            </div>`
-
-                        : ``
-                    }
                 </div>
             </div>
             
