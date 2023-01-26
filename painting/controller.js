@@ -14,21 +14,29 @@ function listAction(request, response) {
 
       const isLoggedIn = request.session.passport !== undefined;
 
+      //used to update dynamic content on the view e.g. profile icon, etc
       const userData = {
         isLoggedIn: isLoggedIn,
         id: isLoggedIn ? request.session.passport.user : -1,
         avatar: undefined
       }
 
+      //we only want to display images that are not sold yet, reverse cause we want newer items first
+      const filteredPaintings = paintings.filter(p => !p.sold).reverse();
+
       if(isLoggedIn) {
         userModel.get( { id: userData.id} ).then(
           user => {
             userData.avatar = user.avatar;
-            response.send(viewPage(paintings, userData));
+
+            //show page to user
+            response.send(viewPage(filteredPaintings, userData));
           }
         )
       } else {
-        response.send(viewPage(paintings, userData));
+
+        //show page to user
+        response.send(viewPage(filteredPaintings, userData));
       }
     },
     error => response.send(error)
@@ -44,6 +52,7 @@ function listSingleAction(request, response) {
       painting => {
         const isLoggedIn = request.session.passport !== undefined;
 
+        //used to update dynamic content on the view e.g. profile icon, etc
         const userData = {
           isLoggedIn: isLoggedIn,
           id: isLoggedIn ? request.session.passport.user : -1,
@@ -54,10 +63,13 @@ function listSingleAction(request, response) {
           userModel.get( { id: userData.id} ).then(
             user => {
               userData.avatar = user.avatar;
+
+              //show page to user
               response.send(paintingPage(painting, userData));
             }
           )
         } else {
+          //show page to user
           response.send(paintingPage(painting, userData));
         }
 

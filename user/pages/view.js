@@ -15,7 +15,7 @@ module.exports = function render(user, localUser) {
                 <a href="/"><img class="logo" src="/logo.svg"><!-- Icon by https://freeicons.io/profile/75801 --></a>
                 <p class="headline">ArtLocker</p>
                 <div>
-                    <img class="profile-icon" src="${user.avatar ? `/avatars/${user.avatar}` : "/user.svg"}" onclick="toggleProfileMenu()"><!-- Icon by https://freeicons.io/profile/6156 -->
+                    <img class="profile-icon" src="${localUser.avatar ? `/avatars/${localUser.avatar}` : "/user.svg"}" onclick="toggleProfileMenu()"><!-- Icon by https://freeicons.io/profile/6156 -->
                     ${createProfileMenu(localUser)}
                 </div>
             </nav>
@@ -28,16 +28,28 @@ module.exports = function render(user, localUser) {
                             <p class="user-handle">@${user.username}</p>
                         </div>
                     </div>
-                    <div class="profile-item-container">
-                        ${user.paintings.map(x => createItem(x, localUser.isProfileOwner)).join('')}
-                        
-                        ${localUser.isLoggedIn 
-                            ? `<div class="item-add">
-                                <a href="/painting/form">+</a>
-                                </div>`
 
-                            : ``
-                        }
+                    <div class="content">
+                        <div class="category-container">
+                            <p class="category-headline">Aktuelle Angebote</p>
+                            <div class="profile-item-container">
+                                ${user.paintings.filter(p => !p.sold).map(x => createItem(x, localUser.isProfileOwner)).join('')}
+                                ${localUser.isProfileOwner && localUser.isLoggedIn 
+                                    ? `<div class="item-add">
+                                        <a href="/painting/form">+</a>
+                                        </div>`
+
+                                    : ``
+                                }
+                            </div>
+                        </div>
+
+                        <div class="category-container">
+                            <p class="category-headline">Abgeschlossene Angebote</p>
+                            <div class="profile-item-container">
+                                ${user.paintings.filter(p => p.sold).map(x => createItem(x, localUser.isProfileOwner)).join('')}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </body>
@@ -67,14 +79,18 @@ function createItem(item, isProfileOwner) {
             <div class="item-data-container">
                 <p class="item-description">${item.description}</p>
                 <div class="horizontal-line"></div>
-                <div class="buy-container">
-                    <p class="item-price font-grey">${item.price} €</p>
-                    ${isProfileOwner 
-                        ? `<button class="buy-button"><a href="/painting/delete/${item.id}">Löschen</a></button>` 
-                        : `<button class="buy-button"><a href="/painting/buy/${item.id}">Kaufen</a></button>`}
-                </div>
+                ${!item.sold ? createBuyContainer(item, isProfileOwner) : `<p class="item-price font-grey">Verkauft</p>`}
             </div>
         </div>`
+}
+
+function createBuyContainer(item, isProfileOwner) {
+    return `<div class="buy-container">
+    <p class="item-price font-grey">${item.price} €</p>
+    ${isProfileOwner 
+        ? `<button class="buy-button"><a href="/painting/delete/${item.id}">Löschen</a></button>` 
+        : `<button class="buy-button"><a href="/painting/buy/${item.id}">Kaufen</a></button>`}
+    </div>`;
 }
 
 

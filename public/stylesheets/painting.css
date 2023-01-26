@@ -128,7 +128,6 @@
 .icon-container {
     width: 100%;
     justify-content: space-evenly;
-    
 }
 
 .creation, .views, .favorites {
@@ -151,6 +150,13 @@
     left: 5%;
     height: 1px;
     background-color: rgba(156, 154, 154, 0.521);
+}
+
+.painting-buy-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1vh 0;
 }
 
 @media (max-width: 40em) {

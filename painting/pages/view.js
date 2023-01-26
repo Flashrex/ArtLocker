@@ -75,8 +75,12 @@ function findMostPopularItems(items, count) {
 }
 
 function compareItems(item1, item2) {
-    if(item1.views > item2.views) return -1;
-    else if(item1.views < item2.views) return 1;
+    const favoriteMultiplier = 5;
+    const impressionsItem1 = item1.views + (item1.favs * favoriteMultiplier);
+    const impressionsItem2 = item2.views + (item2.favs * favoriteMultiplier);
+
+    if(impressionsItem1 > impressionsItem2) return -1;
+    else if(impressionsItem1 < impressionsItem2) return 1;
     else return 0;
 }
 

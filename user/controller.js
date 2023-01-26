@@ -11,41 +11,47 @@ const form = require('./pages/settings');
 const { log } = require('../logger');
 
 function listAction(request, response) {
-    const id = parseInt(request.params.id, 10);
+    const profileid = parseInt(request.params.id, 10);
     
-    //userdaten des profilbesitzers abfragen
-    userModel.get( { id: id }).then (
-        user => {
-            if(!user) {
-                response.send("Konnte Profil nicht finden.");
-                return;
-            }
+    const localUserId = request.session.passport.user;
 
-            //abfragen der bilder des profilbesitzer
-            paintingModel.getAllByAuthorId(id).then(
+    if(localUserId) {
+      userModel.get( { id: localUserId }).then (
+        localUser => {
 
-                paintings => {
-                    if(!paintings) {
-                        response.send("Fehler beim Laden der Bilder.");
-                        return;
-                    }
+          //set values for dynamic page rendering
+          localUser.isLoggedIn = true;
+          localUser.isProfileOwner = localUserId == profileid;
 
-                    //user ist profilbesitzer
-                    user.paintings = paintings;
-
-                    //localuser ist lokaler user der dieses Profil aufruft
-                    const localUser = {
-                      isLoggedIn: true,
-                      id: request.session.passport.user,
-                      isProfileOwner: request.session.passport.user == id
-                    }
-
-                    response.send(view(user, localUser));
+          //get data from profile owner
+          userModel.get( { id: profileid }).then (
+            user => {
+                if(!user) {
+                    response.send("Konnte Profil nicht finden.");
+                    return;
                 }
-            )
-        },
-        err => response.send(err),
-    )
+    
+                //abfragen der bilder des profilbesitzer
+                paintingModel.getAllByAuthorId(user.id).then(
+    
+                    paintings => {
+                        if(!paintings) {
+                            response.send("Fehler beim Laden der Bilder.");
+                            return;
+                        }
+    
+                        //user ist profilbesitzer
+                        user.paintings = paintings;
+    
+                        response.send(view(user, localUser));
+                    }
+                )
+            },
+            err => response.send(err),
+        )
+        }
+      )
+    }
 }
 
 /*function deleteAction(request, response) {

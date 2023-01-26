@@ -55,6 +55,7 @@ module.exports = function render(painting, user) {
                         <p>${painting.favs}</p>
                     </div>
                 </div>
+                ${createBuyContainer(painting, user.id == painting.author)}
             </div>
         </div>
       </body>
@@ -68,6 +69,16 @@ module.exports = function render(painting, user) {
       </script>
     </html>`;
 };
+
+function createBuyContainer(item, isProfileOwner) {
+    if(item.sold) return `<div class="painting-buy-container"></div>`;
+
+    return `<div class="painting-buy-container">
+    ${isProfileOwner 
+        ? `<button class="buy-button"><a href="/painting/delete/${item.id}">Löschen</a></button>` 
+        : `<button class="buy-button"><a href="/painting/buy/${item.id}">Kaufen</a></button>`}
+    </div>`;
+}
 
 function createProfileMenu(user) {
     if(user.isLoggedIn) {

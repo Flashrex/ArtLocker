@@ -67,10 +67,10 @@ function insert(painting) {
 
 function update(painting) {
   return new Promise((resolve, reject) => {
-    const query = 'UPDATE Paintings SET title = ?, description = ?, author = ?, price = ?, image = ?, favs = ?, views = ? WHERE id = ?';
+    const query = 'UPDATE Paintings SET title = ?, description = ?, author = ?, price = ?, image = ?, favs = ?, views = ?, sold = ? WHERE id = ?';
     connection.query(
       query,
-      [painting.title, painting.description, painting.author, painting.price, painting.image, painting.favs, painting.views, painting.id],
+      [painting.title, painting.description, painting.author, painting.price, painting.image, painting.favs, painting.views, painting.sold, painting.id],
       (error, results) => {
         if (error) {
           reject(error);
