@@ -33,7 +33,7 @@ Das Thema war eine selbst gewählte FullStack-WebApplikation mit eigens festgele
 - Open "http://localhost:8080" in your browser
 
 ## Images
-![painting](https://github.com/Flashrex/ArtLocker/tree/master/public/readme/painting.png?raw=true)
-![profile](https://github.com/Flashrex/ArtLocker/tree/master/public/readme/profile.png?raw=true)
-![settings](https://github.com/Flashrex/ArtLocker/tree/master/public/readme/settings.png?raw=true)
+![painting](https://github.com/Flashrex/ArtLocker/blob/master/public/readme/painting.png?raw=true)
+![profile](https://github.com/Flashrex/ArtLocker/blob/master/public/readme/profile.png?raw=true)
+![settings](https://github.com/Flashrex/ArtLocker/blob/master/public/readme/settings.png?raw=true)
 
