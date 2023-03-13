@@ -26,8 +26,8 @@ Das Thema war eine selbst gewählte FullStack-WebApplikation mit eigens festgele
 
 - Download project
 - Setup database
--- User: [{++id:int++, username:string, firstname:string, surname:string, email:string, password:string, avatar:string}]
--- Paintings: [{++id:int++, title:string, description:string, author:int, price:float, image:string, createdAt:datetime, favs:int, views:int, sold:boolean}]
+-- User: [{<u>id:int</u>, username:string, firstname:string, surname:string, email:string, password:string, avatar:string}]
+-- Paintings: [{<u>id:int</u>, title:string, description:string, author:int, price:float, image:string, createdAt:datetime, favs:int, views:int, sold:boolean}]
 - Create .env file in root folder and add your database credentials
 - Run project using "node index" from terminal in root folder
 - Open "http://localhost:8080" in your browser
