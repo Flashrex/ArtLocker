@@ -1,5 +1,5 @@
 # Artlocker
-![mainpage](https://github.com/Flashrex/ArtLocker/tree/master/public/readme/main.png)
+![mainpage](https://github.com/Flashrex/ArtLocker/blob/master/public/readme/main.png?raw=true)
 
 ## Fullstack Web Applikation
 Dieses Projekt ist als Uni-Projekt entstanden.
